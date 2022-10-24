@@ -32,7 +32,7 @@ export const topNews = createAsyncThunk(
     if (search) param += `&search=${search}`;
     if (sort) param += `&sort=${sort}`;
     const { data } = await axios.get(
-      `https://api.thenewsapi.com/v1/news/top?api_token=${process.env.REACT_NEWS_KEY}${param}`
+      `https://api.thenewsapi.com/v1/news/top?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
     return data;
   }
@@ -54,7 +54,7 @@ export const allNews = createAsyncThunk(
     if (search) param += `&search=${search}`;
     if (sort) param += `&sort=${sort}`;
     const { data } = await axios.get(
-      `https://api.thenewsapi.com/v1/news/all?api_token=${process.env.REACT_NEWS_KEY}${param}`
+      `https://api.thenewsapi.com/v1/news/all?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
     return data;
   }
@@ -77,7 +77,7 @@ export const similarNews = createAsyncThunk(
     if (search) param += `&search=${search}`;
     if (sort) param += `&sort=${sort}`;
     const { data } = await axios.get(
-      `https://api.thenewsapi.com/v1/news/similar/${uuid}?api_token=${process.env.REACT_NEWS_KEY}${param}`
+      `https://api.thenewsapi.com/v1/news/similar/${uuid}?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
     return data;
   }
@@ -87,7 +87,7 @@ export const newsByUuid = createAsyncThunk(
   "customization/fetchByUuidNews",
   async (uuid) => {
     const { data } = await axios.get(
-      `https://api.thenewsapi.com/v1/news/${uuid}?api_token=${process.env.REACT_NEWS_KEY}`
+      `https://api.thenewsapi.com/v1/news/${uuid}?api_token=${process.env.REACT_APP_NEWS_KEY}`
     );
     return data;
   }
@@ -97,7 +97,7 @@ export const sources = createAsyncThunk(
   "customization/fetchSources",
   async () => {
     const { data } = await axios.get(
-      `https://api.thenewsapi.com/v1/news/sources?api_token=${process.env.REACT_NEWS_KEY}`
+      `https://api.thenewsapi.com/v1/news/sources?api_token=${process.env.REACT_APP_NEWS_KEY}`
     );
     return data;
   }
