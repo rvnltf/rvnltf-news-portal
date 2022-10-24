@@ -26,11 +26,11 @@ export const topNews = createAsyncThunk(
     sort = null
   ) => {
     let param = "";
-    if (limit) param += `&limit=${limit}`;
-    if (locale) param += `&locale=${locale}`;
-    if (categories) param += `&categories=${categories}`;
-    if (search) param += `&search=${search}`;
-    if (sort) param += `&sort=${sort}`;
+    if (limit !== null) param += `&limit=${limit}`;
+    if (locale !== null) param += `&locale=${locale}`;
+    if (categories !== null) param += `&categories=${categories}`;
+    if (search !== null) param += `&search=${search}`;
+    if (sort !== null) param += `&sort=${sort}`;
     const { data } = await axios.get(
       `https://api.thenewsapi.com/v1/news/top?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
@@ -48,11 +48,11 @@ export const allNews = createAsyncThunk(
     sort = null
   ) => {
     let param = "";
-    if (limit) param += `&limit=${limit}`;
-    if (locale) param += `&locale=${locale}`;
-    if (categories) param += `&categories=${categories}`;
-    if (search) param += `&search=${search}`;
-    if (sort) param += `&sort=${sort}`;
+    if (limit !== null) param += `&limit=${limit}`;
+    if (locale !== null) param += `&locale=${locale}`;
+    if (categories !== null) param += `&categories=${categories}`;
+    if (search !== null) param += `&search=${search}`;
+    if (sort !== null) param += `&sort=${sort}`;
     const { data } = await axios.get(
       `https://api.thenewsapi.com/v1/news/all?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
@@ -71,11 +71,11 @@ export const similarNews = createAsyncThunk(
     sort = null
   ) => {
     let param = "";
-    if (limit) param += `&limit=${limit}`;
-    if (locale) param += `&locale=${locale}`;
-    if (categories) param += `&categories=${categories}`;
-    if (search) param += `&search=${search}`;
-    if (sort) param += `&sort=${sort}`;
+    if (limit !== null) param += `&limit=${limit}`;
+    if (locale !== null) param += `&locale=${locale}`;
+    if (categories !== null) param += `&categories=${categories}`;
+    if (search !== null) param += `&search=${search}`;
+    if (sort !== null) param += `&sort=${sort}`;
     const { data } = await axios.get(
       `https://api.thenewsapi.com/v1/news/similar/${uuid}?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
