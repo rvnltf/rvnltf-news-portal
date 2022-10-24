@@ -2,19 +2,25 @@ import { Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gridSpacing } from "../../store/constants";
-import { selectNews, topNews } from "../../store/customization";
+import {
+  allNews,
+  selectAllNews,
+  selectTopNews,
+  topNews,
+} from "../../store/customization";
 import CorauselNews from "./CorauselNews";
 import HeadlineNews from "./HeadlineNews";
 import LatestNews from "./LatestNews";
 import SimilarNews from "./SimilarNews";
 
 function Home() {
-  let news = useSelector(selectNews);
+  let topNewsData = useSelector(selectTopNews);
+  let allNewsData = useSelector(selectAllNews);
   const dispatcher = useDispatch();
-  // console.log(news);
 
   useEffect(() => {
     dispatcher(topNews(5));
+    dispatcher(allNews(5));
   }, [dispatcher]);
   return (
     <Grid container spacing={gridSpacing}>
@@ -33,7 +39,7 @@ function Home() {
         </Grid>
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} md={9}>
-            <CorauselNews data={news.data} />
+            <CorauselNews data={topNewsData.data} />
             <Grid
               container
               spacing={gridSpacing}
@@ -52,7 +58,7 @@ function Home() {
                     </Typography>
                   </Grid>
                 </Grid>
-                <LatestNews />
+                <LatestNews data={allNewsData.data} />
               </Grid>
               <Grid
                 item
