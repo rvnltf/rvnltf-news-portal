@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 // material-ui
 import { Avatar, Box, ButtonBase } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -8,8 +6,8 @@ import { useTheme } from "@mui/material/styles";
 import LogoSection from "../LogoSection";
 import SearchSection from "./SearchSection";
 
-import MenuList from "../MenuList";
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuList from "../MenuList";
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 

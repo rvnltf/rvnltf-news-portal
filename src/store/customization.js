@@ -14,23 +14,19 @@ const initialState = {
   sources: {},
   news: {},
   similarNews: {},
+  newsByUuid: {},
 };
 
 export const topNews = createAsyncThunk(
   "customization/fetchTopNews",
-  async (
-    limit = null,
-    locale = null,
-    categories = null,
-    search = null,
-    sort = null
-  ) => {
+  async (q) => {
+    let { limit, local, categories, search, sort } = q;
     let param = "";
-    if (limit !== null) param += `&limit=${limit}`;
-    if (locale !== null) param += `&locale=${locale}`;
-    if (categories !== null) param += `&categories=${categories}`;
-    if (search !== null) param += `&search=${search}`;
-    if (sort !== null) param += `&sort=${sort}`;
+    if (limit) param += `&limit=${limit}`;
+    if (local) param += `&locale=${local}`;
+    if (categories) param += `&categories=${categories}`;
+    if (search) param += `&search=${search}`;
+    if (sort) param += `&sort=${sort}`;
     const { data } = await axios.get(
       `https://api.thenewsapi.com/v1/news/top?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
@@ -38,21 +34,25 @@ export const topNews = createAsyncThunk(
   }
 );
 
+export const headlineNews = createAsyncThunk(
+  "customization/fetchHeadlineNews",
+  async () => {
+    const { data } = await axios.get(
+      `https://api.thenewsapi.com/v1/news/all?api_token=${process.env.REACT_APP_NEWS_KEY}&limit=1`
+    );
+    return data.data;
+  }
+);
 export const allNews = createAsyncThunk(
   "customization/fetchAllNews",
-  async (
-    limit = null,
-    locale = null,
-    categories = null,
-    search = null,
-    sort = null
-  ) => {
+  async (q) => {
+    let { limit, local, categories, search, sort } = q;
     let param = "";
-    if (limit !== null) param += `&limit=${limit}`;
-    if (locale !== null) param += `&locale=${locale}`;
-    if (categories !== null) param += `&categories=${categories}`;
-    if (search !== null) param += `&search=${search}`;
-    if (sort !== null) param += `&sort=${sort}`;
+    if (limit) param += `&limit=${limit}`;
+    if (local) param += `&locale=${local}`;
+    if (categories) param += `&categories=${categories}`;
+    if (search) param += `&search=${search}`;
+    if (sort) param += `&sort=${sort}`;
     const { data } = await axios.get(
       `https://api.thenewsapi.com/v1/news/all?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
@@ -62,20 +62,14 @@ export const allNews = createAsyncThunk(
 
 export const similarNews = createAsyncThunk(
   "customization/fetchSimilarNews",
-  async (
-    uuid,
-    limit = null,
-    locale = null,
-    categories = null,
-    search = null,
-    sort = null
-  ) => {
+  async (q) => {
+    let { uuid, limit, local, categories, search, sort } = q;
     let param = "";
-    if (limit !== null) param += `&limit=${limit}`;
-    if (locale !== null) param += `&locale=${locale}`;
-    if (categories !== null) param += `&categories=${categories}`;
-    if (search !== null) param += `&search=${search}`;
-    if (sort !== null) param += `&sort=${sort}`;
+    if (limit) param += `&limit=${limit}`;
+    if (local) param += `&locale=${local}`;
+    if (categories) param += `&categories=${categories}`;
+    if (search) param += `&search=${search}`;
+    if (sort) param += `&sort=${sort}`;
     const { data } = await axios.get(
       `https://api.thenewsapi.com/v1/news/similar/${uuid}?api_token=${process.env.REACT_APP_NEWS_KEY}${param}`
     );
@@ -87,7 +81,7 @@ export const newsByUuid = createAsyncThunk(
   "customization/fetchByUuidNews",
   async (uuid) => {
     const { data } = await axios.get(
-      `https://api.thenewsapi.com/v1/news/${uuid}?api_token=${process.env.REACT_APP_NEWS_KEY}`
+      `https://api.thenewsapi.com/v1/news/uuid/${uuid}?api_token=${process.env.REACT_APP_NEWS_KEY}`
     );
     return data;
   }
@@ -99,6 +93,7 @@ export const sources = createAsyncThunk(
     const { data } = await axios.get(
       `https://api.thenewsapi.com/v1/news/sources?api_token=${process.env.REACT_APP_NEWS_KEY}`
     );
+
     return data;
   }
 );
@@ -137,6 +132,7 @@ const customizationSlice = createSlice({
         state.hasError = true;
         console.log("Fail to get user data");
       });
+
     builder
       .addCase(allNews.pending, (state) => {
         state.isLoading = true;
@@ -153,22 +149,7 @@ const customizationSlice = createSlice({
         state.hasError = true;
         console.log("Fail to get user data");
       });
-    // builder
-    //   .addCase(allNews.pending, (state) => {
-    //     state.isLoading = true;
-    //     state.hasError = false;
-    //     console.log("Loading ...");
-    //   })
-    //   .addCase(allNews.fulfilled, (state, action) => {
-    //     state.headlineNews = action.payload;
-    //     state.isLoading = false;
-    //     state.hasError = false;
-    //   })
-    //   .addCase(allNews.rejected, (state) => {
-    //     state.isLoading = false;
-    //     state.hasError = true;
-    //     console.log("Fail to get user data");
-    //   });
+
     builder
       .addCase(sources.pending, (state) => {
         state.isLoading = true;
@@ -185,6 +166,57 @@ const customizationSlice = createSlice({
         state.hasError = true;
         console.log("Fail to get user data");
       });
+
+    builder
+      .addCase(headlineNews.pending, (state) => {
+        state.isLoading = true;
+        state.hasError = false;
+        console.log("Loading ...");
+      })
+      .addCase(headlineNews.fulfilled, (state, action) => {
+        state.headlineNews = action.payload;
+        state.isLoading = false;
+        state.hasError = false;
+      })
+      .addCase(headlineNews.rejected, (state) => {
+        state.isLoading = false;
+        state.hasError = true;
+        console.log("Fail to get user data");
+      });
+
+    builder
+      .addCase(similarNews.pending, (state) => {
+        state.isLoading = true;
+        state.hasError = false;
+        console.log("Loading ...");
+      })
+      .addCase(similarNews.fulfilled, (state, action) => {
+        state.similarNews = action.payload;
+        state.isLoading = false;
+        state.hasError = false;
+      })
+      .addCase(similarNews.rejected, (state) => {
+        state.isLoading = false;
+        state.hasError = true;
+        console.log("Fail to get user data");
+      });
+
+    builder
+      .addCase(newsByUuid.pending, (state) => {
+        state.isLoading = true;
+        state.hasError = false;
+        console.log("Loading ...");
+      })
+      .addCase(newsByUuid.fulfilled, (state, action) => {
+        state.newsByUuid = action.payload;
+        state.isLoading = false;
+        state.hasError = false;
+      })
+      .addCase(newsByUuid.rejected, (state) => {
+        state.isLoading = false;
+        state.hasError = true;
+        console.log("Fail to get user data");
+      });
   },
 });
 
@@ -196,7 +228,9 @@ export const selectLoadingState = (state) => state.customization.isLoading;
 export const selectErrorState = (state) => state.customization.hasError;
 export const selectTopNews = (state) => state.customization.topNews;
 export const selectAllNews = (state) => state.customization.allNews;
-// export const selectHeadlineNews = (state) => state.customization.headlineNews;
+export const selectNewsById = (state) => state.customization.newsByUuid;
+export const selectHeadlineNews = (state) => state.customization.headlineNews;
+export const selectSimilarNews = (state) => state.customization.similarNews;
 export const selectSources = (state) => state.customization.sources;
 
 export default customizationSlice.reducer;

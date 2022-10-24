@@ -2,13 +2,10 @@ import { Link } from "react-router-dom";
 
 // material-ui
 import { ButtonBase, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 
 // ==============================|| MAIN LOGO ||============================== //
 
 const LogoSection = () => {
-  const theme = useTheme();
-
   return (
     <ButtonBase disableRipple component={Link} to="/">
       <Typography

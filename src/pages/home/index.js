@@ -4,24 +4,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { gridSpacing } from "../../store/constants";
 import {
   allNews,
+  headlineNews,
   selectAllNews,
+  selectHeadlineNews,
+  selectSources,
   selectTopNews,
+  sources,
   topNews,
 } from "../../store/customization";
 import CorauselNews from "./CorauselNews";
 import HeadlineNews from "./HeadlineNews";
 import LatestNews from "./LatestNews";
 import SimilarNews from "./SimilarNews";
+import SourceList from "./SourceList";
 
 function Home() {
-  let topNewsData = useSelector(selectTopNews);
-  let allNewsData = useSelector(selectAllNews);
+  const topNewsData = useSelector(selectTopNews);
+  // const topNewsData = [];
+  const allNewsData = useSelector(selectAllNews);
+  // const allNewsData = [];
+  const headlineNewsData = useSelector(selectHeadlineNews);
+  // const headlineNewsData = [];
+
+  const sourceData = useSelector(selectSources);
+
   const dispatcher = useDispatch();
 
   useEffect(() => {
-    dispatcher(topNews(5));
-    dispatcher(allNews(5));
+    dispatcher(sources());
+    dispatcher(headlineNews());
+    dispatcher(topNews({ limit: 5, local: "us" }));
+    dispatcher(allNews({ limit: 5, local: "us" }));
   }, [dispatcher]);
+
   return (
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
@@ -77,10 +92,10 @@ function Home() {
                   spacing={gridSpacing}
                 >
                   <Grid item>
-                    <Typography variant="h3">Similar News</Typography>
+                    <Typography variant="h3">Source List</Typography>
                   </Grid>
                 </Grid>
-                <SimilarNews />
+                {/* <SourceList data={sourceData.data} /> */}
               </Grid>
             </Grid>
           </Grid>
@@ -94,7 +109,7 @@ function Home() {
               height: 0,
             }}
           >
-            <HeadlineNews />
+            <HeadlineNews data={headlineNewsData[0]} />
           </Grid>
         </Grid>
       </Grid>

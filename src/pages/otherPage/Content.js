@@ -3,12 +3,11 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import TimeAgo from "react-timeago";
 
 const Content = () => {
-  const [data, setData] = useState([
+  const data = [
     {
       uuid: "3bce4bc8-6363-44a8-9a76-44ee1e05ebec",
       title: "Manchester United vs. Tottenham Hotspur",
@@ -101,7 +100,7 @@ const Content = () => {
       relevance_score: null,
       locale: "gb",
     },
-  ]);
+  ];
 
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }}>

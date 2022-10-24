@@ -1,30 +1,10 @@
-import { Card, CardContent, Grid, Typography } from "@mui/material";
-import Skeleton from "@mui/material/Skeleton";
+import { Card, CardContent, Grid, Skeleton } from "@mui/material";
 import { gridSpacing } from "../../../store/constants";
 
-const HeadlineCard = () => (
+const DetailCard = () => (
   <Card>
     <CardContent>
       <Grid container spacing={gridSpacing}>
-        <Grid item xs={12}>
-          <Grid
-            container
-            alignItems="center"
-            justifyContent="space-between"
-            spacing={gridSpacing}
-          >
-            <Grid item xs zeroMinWidth>
-              <Typography variant="h3">Headline News</Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Skeleton
-            variant="rectangular"
-            height={150}
-            sx={{ borderRadius: 3 }}
-          />
-        </Grid>
         <Grid item xs={12}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
@@ -35,17 +15,24 @@ const HeadlineCard = () => (
                 justifyContent="space-between"
               >
                 <Grid item xs={12}>
-                  <Skeleton variant="rectangular" height={20} />
+                  <Skeleton variant="rectangular" height={30} />
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6}>
-              <Skeleton variant="rectangular" height={20} />
+            <Grid item xs={4}>
+              <Skeleton variant="rectangular" height={12} />
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Grid container spacing={1}>
+          <Skeleton
+            variant="rectangular"
+            height={400}
+            sx={{ borderRadius: 3 }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
               <Skeleton variant="rectangular" height={15} />
             </Grid>
@@ -62,17 +49,7 @@ const HeadlineCard = () => (
         </Grid>
       </Grid>
     </CardContent>
-    <CardContent
-      sx={{
-        display: "flex",
-        pt: 0,
-        pr: 3,
-        justifyContent: "flex-end",
-      }}
-    >
-      <Skeleton variant="rectangular" height={20} width={75} />
-    </CardContent>
   </Card>
 );
 
-export default HeadlineCard;
+export default DetailCard;

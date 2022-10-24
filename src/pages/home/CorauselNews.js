@@ -5,10 +5,8 @@ import {
   Typography,
 } from "@mui/material";
 import Carousel from "better-react-carousel";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import CarouselCard from "../../components/cards/Skeleton/CarouselCard";
-import { selectNews, topNews } from "../../store/customization";
 
 const CorauselNews = ({ data }) => {
   return (
@@ -66,7 +64,11 @@ const CorauselNews = ({ data }) => {
                     borderBottomRightRadius: 12,
                     p: 3,
                   }}
-                  actionIcon={<Button variant="outlined">Read more</Button>}
+                  actionIcon={
+                    <Link to={`/${v.uuid}`} style={{ textDecoration: "none" }}>
+                      <Button variant="outlined">Read more</Button>
+                    </Link>
+                  }
                 />
               </ImageListItem>
             </Carousel.Item>
