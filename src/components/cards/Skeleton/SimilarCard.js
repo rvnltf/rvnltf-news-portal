@@ -1,4 +1,3 @@
-// material-ui
 import {
   Card,
   List,
@@ -7,8 +6,6 @@ import {
   ListItemText,
   Skeleton,
 } from "@mui/material";
-
-// ==============================|| SKELETON - TOTAL INCOME DARK/LIGHT CARD ||============================== //
 
 const SimilarCard = () => (
   <Card sx={{ p: 2 }}>

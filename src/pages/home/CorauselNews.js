@@ -16,8 +16,8 @@ const CorauselNews = ({ data }) => {
       ) : (
         <Carousel loop showDots autoplay={3000}>
           {data.map((v) => (
-            <Carousel.Item>
-              <ImageListItem key={v.uuid}>
+            <Carousel.Item key={v.uuid}>
+              <ImageListItem>
                 <img
                   src={`${v.image_url}`}
                   srcSet={`${v.image_url}`}

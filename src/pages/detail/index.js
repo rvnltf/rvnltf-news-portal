@@ -6,9 +6,7 @@ import ReactTimeago from "react-timeago";
 import DetailCard from "../../components/cards/Skeleton/DetailCard";
 import { gridSpacing } from "../../store/constants";
 import { newsByUuid, selectNewsById } from "../../store/customization";
-import SimilarNews from "../home/SimilarNews";
-import Content from "./Content";
-import TopNews from "./TopNews";
+import SimilarNews from "./SimilarNews";
 
 const Detail = () => {
   const { uuid } = useParams();

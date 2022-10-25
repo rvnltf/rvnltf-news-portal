@@ -7,11 +7,11 @@ const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 const newList = shuffle(locale);
 
 newList.slice(0, 4).map((v) => {
-  localeRoutes.push({
+  return localeRoutes.push({
     id: v.code,
     title: v.country,
     type: "item",
-    url: `/${v.code}`,
+    url: `/search?type=locale&q=${v.code}`,
   });
 });
 

@@ -6,18 +6,19 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import CategoriesList from "./CategoriesList";
 
 export default function SourceList({ data }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
-  const handleClick = (source_id, value) => {
-    const updateOpen = open[source_id];
-    updateOpen.isOpen = value;
-
-    const newOpen = [...open];
-    newOpen[source_id] = updateOpen;
-    setOpen(newOpen);
+  const handleClick = () => {
+    setOpen(!open);
+    // const updateOpen = open[source_id];
+    // updateOpen.isOpen = value;
+    // const newOpen = [...open];
+    // newOpen[source_id] = updateOpen;
+    // setOpen(newOpen);
   };
 
   return (
@@ -34,20 +35,29 @@ export default function SourceList({ data }) {
             // const [open, setOpen] = useState({ i: true });
 
             return (
-              <>
-                <ListItemButton key={i}>
+              <div key={i}>
+                <ListItemButton>
                   <ListItemIcon>
                     <Folder />
                   </ListItemIcon>
-                  <ListItemText primary={v.domain} />
+                  <ListItemText
+                    primary={
+                      <Link
+                        to={`search?type=domains&q=${v.domain}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        {v.domain}
+                      </Link>
+                    }
+                  />
                   {open ? (
-                    <ExpandLess onClick={handleClick(v.source_id, true)} />
+                    <ExpandLess onClick={handleClick} />
                   ) : (
-                    <ExpandMore onClick={handleClick(v.source_id, true)} />
+                    <ExpandMore onClick={handleClick} />
                   )}
                 </ListItemButton>
-                <CategoriesList open={open} data={v.categries} />
-              </>
+                <CategoriesList open={open} data={v.categories} />
+              </div>
             );
           })}
         </List>

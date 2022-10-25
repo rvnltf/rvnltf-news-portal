@@ -7,6 +7,7 @@ const initialState = {
   borderRadius: 12,
   opened: true,
   isLoading: false,
+  isLoadingAll: false,
   hasError: false,
   topNews: {},
   allNews: {},
@@ -135,17 +136,17 @@ const customizationSlice = createSlice({
 
     builder
       .addCase(allNews.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingAll = true;
         state.hasError = false;
         console.log("Loading ...");
       })
       .addCase(allNews.fulfilled, (state, action) => {
         state.allNews = action.payload;
-        state.isLoading = false;
+        state.isLoadingAll = false;
         state.hasError = false;
       })
       .addCase(allNews.rejected, (state) => {
-        state.isLoading = false;
+        state.isLoadingAll = false;
         state.hasError = true;
         console.log("Fail to get user data");
       });
@@ -224,8 +225,13 @@ export const { MENU_OPEN, SET_MENU, SET_FONT_FAMILY, SET_BORDER_RADIUS } =
   customizationSlice.actions;
 
 export const selectOpenState = (state) => state.customization.opened;
+
 export const selectLoadingState = (state) => state.customization.isLoading;
+export const selectLoadingAllState = (state) =>
+  state.customization.isLoadingAll;
+
 export const selectErrorState = (state) => state.customization.hasError;
+
 export const selectTopNews = (state) => state.customization.topNews;
 export const selectAllNews = (state) => state.customization.allNews;
 export const selectNewsById = (state) => state.customization.newsByUuid;

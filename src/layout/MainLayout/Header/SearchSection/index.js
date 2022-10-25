@@ -24,6 +24,7 @@ import Transitions from "../../../../components/extended/Transitions";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import { shouldForwardProp } from "@mui/system";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // styles
 const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
@@ -75,12 +76,17 @@ const HeaderAvatarStyle = styled(Avatar, { shouldForwardProp })(
 const MobileSearch = ({ value, setValue, popupState }) => {
   const theme = useTheme();
 
-  console.log(theme);
   return (
     <OutlineInputStyle
       id="input-search-header"
       value={value}
       onChange={(e) => setValue(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          console.log(e.target.value);
+          return <Navigate to={`/search?q=${e.target.value}`} />;
+        }
+      }}
       placeholder="Search"
       startAdornment={
         <InputAdornment position="start">
@@ -132,6 +138,7 @@ MobileSearch.propTypes = {
 const SearchSection = () => {
   const theme = useTheme();
   const [value, setValue] = useState("");
+  let navigate = useNavigate();
 
   return (
     <>
@@ -196,6 +203,13 @@ const SearchSection = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Search"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              console.log(e.target.value);
+
+              navigate(`/search?type=search&q=${e.target.value}`);
+            }
+          }}
           endAdornment={
             <InputAdornment position="start">
               <SearchIcon

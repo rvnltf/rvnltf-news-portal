@@ -8,12 +8,12 @@ function App() {
   const customization = useSelector((state) => state.customization);
 
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={themes(customization)}>
-        <CssBaseline />
-        <Routes />
-      </ThemeProvider>
-    </StyledEngineProvider>
+    // <StyledEngineProvider injectFirst>
+    <ThemeProvider theme={themes(customization)}>
+      <CssBaseline />
+      <Routes />
+    </ThemeProvider>
+    // </StyledEngineProvider>
   );
 }
 

@@ -3,9 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { gridSpacing } from "../../store/constants";
 import {
-  allNews,
   headlineNews,
-  selectAllNews,
   selectHeadlineNews,
   selectSources,
   selectTopNews,
@@ -15,14 +13,11 @@ import {
 import CorauselNews from "./CorauselNews";
 import HeadlineNews from "./HeadlineNews";
 import LatestNews from "./LatestNews";
-import SimilarNews from "./SimilarNews";
 import SourceList from "./SourceList";
 
 function Home() {
   const topNewsData = useSelector(selectTopNews);
   // const topNewsData = [];
-  const allNewsData = useSelector(selectAllNews);
-  // const allNewsData = [];
   const headlineNewsData = useSelector(selectHeadlineNews);
   // const headlineNewsData = [];
 
@@ -34,7 +29,6 @@ function Home() {
     dispatcher(sources());
     dispatcher(headlineNews());
     dispatcher(topNews({ limit: 5, local: "us" }));
-    dispatcher(allNews({ limit: 5, local: "us" }));
   }, [dispatcher]);
 
   return (
@@ -73,7 +67,7 @@ function Home() {
                     </Typography>
                   </Grid>
                 </Grid>
-                <LatestNews data={allNewsData.data} />
+                <LatestNews />
               </Grid>
               <Grid
                 item
@@ -95,7 +89,7 @@ function Home() {
                     <Typography variant="h3">Source List</Typography>
                   </Grid>
                 </Grid>
-                {/* <SourceList data={sourceData.data} /> */}
+                <SourceList data={sourceData.data} />
               </Grid>
             </Grid>
           </Grid>

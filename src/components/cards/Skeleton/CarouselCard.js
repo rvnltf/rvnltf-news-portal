@@ -1,7 +1,4 @@
-// material-ui
 import { Card, Skeleton } from "@mui/material";
-
-// ==============================|| SKELETON - TOTAL INCOME DARK/LIGHT CARD ||============================== //
 
 const CarouselCard = () => (
   <Card sx={{ p: 2 }}>

@@ -1,9 +1,15 @@
 import { Grid, Typography } from "@mui/material";
-import { gridSpacing } from "../../store/constants";
+import { useSearchParams } from "react-router-dom";
+import { gridSpacing, locale } from "../../store/constants";
 import Content from "./Content";
 import TopNews from "./TopNews";
 
-const OtherPage = () => {
+const NewsList = () => {
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get("q");
+
+  let search = locale.find((v) => v.code === q);
+
   return (
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
@@ -11,7 +17,7 @@ const OtherPage = () => {
           <Grid item xs={12} md={8}>
             <Grid item>
               <Typography variant="h2" sx={{ pl: 2 }}>
-                Headline News
+                Search for "{search ? search.country : q}"
               </Typography>
             </Grid>
             <Content />
@@ -44,4 +50,4 @@ const OtherPage = () => {
   );
 };
 
-export default OtherPage;
+export default NewsList;

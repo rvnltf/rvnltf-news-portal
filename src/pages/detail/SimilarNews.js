@@ -37,7 +37,7 @@ const SimilarNews = () => {
       ) : (
         data?.map((v, i) => {
           return (
-            <>
+            <div key={i}>
               <Link to={`/${v.uuid}`} style={{ textDecoration: "none" }}>
                 <MainCard border={true} content={false} sx={{ my: 1 }}>
                   <Box sx={{ p: 1 }}>
@@ -105,7 +105,7 @@ const SimilarNews = () => {
                   </Box>
                 </MainCard>
               </Link>
-            </>
+            </div>
           );
         })
       )}

@@ -1,7 +1,7 @@
 import MainLayout from "../layout/MainLayout";
 import Detail from "../pages/detail";
 import Home from "../pages/home";
-import OtherPage from "../pages/otherPage";
+import NewsList from "../pages/newsList";
 
 const MainRoutes = {
   path: "/",
@@ -12,12 +12,8 @@ const MainRoutes = {
       element: <Home />,
     },
     {
-      path: "/headline",
-      element: <OtherPage />,
-    },
-    {
-      path: "/top-stories",
-      element: <OtherPage />,
+      path: "/search",
+      element: <NewsList />,
     },
     {
       path: "/:uuid",

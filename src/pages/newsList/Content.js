@@ -5,14 +5,18 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import LatestNewsCard from "../../components/cards/Skeleton/LatestNewsCard";
-import useAllNews from "../../utils/useAllNews";
+import useFetch from "../../utils/useFetch";
 
-const LatestNews = () => {
+const Content = () => {
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
+  const q = searchParams.get("q");
+  const [query, setQuery] = useState("");
   const [pageNum, setPageNum] = useState(1);
-  const { loading, error, list, hasMore } = useAllNews(pageNum);
+  const { loading, error, list, hasMore } = useFetch(type, query, pageNum);
 
   const observer = useRef(); // (*)
   const lastElemetRef = useCallback(
@@ -31,8 +35,9 @@ const LatestNews = () => {
   );
 
   useEffect(() => {
+    setQuery(q);
     setPageNum(1);
-  }, [setPageNum]);
+  }, [setQuery, setPageNum, q]);
 
   return (
     <>
@@ -62,8 +67,8 @@ const LatestNews = () => {
                           alt={v.title}
                           loading="lazy"
                           style={{
-                            width: 120,
-                            height: 80,
+                            width: 140,
+                            height: 100,
                             borderRadius: 12,
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center",
@@ -115,9 +120,6 @@ const LatestNews = () => {
                             </Typography>
                           </>
                         }
-                        sx={{
-                          my: 0,
-                        }}
                       />
                     </ListItem>
                   </Link>
@@ -140,8 +142,8 @@ const LatestNews = () => {
                           alt={v.title}
                           loading="lazy"
                           style={{
-                            width: 120,
-                            height: 80,
+                            width: 140,
+                            height: 100,
                             borderRadius: 12,
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center",
@@ -193,9 +195,6 @@ const LatestNews = () => {
                             </Typography>
                           </>
                         }
-                        sx={{
-                          my: 0,
-                        }}
                       />
                     </ListItem>
                   </Link>
@@ -206,7 +205,6 @@ const LatestNews = () => {
               );
             })}
           </List>
-
           {loading && (
             <>
               <LatestNewsCard />
@@ -221,4 +219,4 @@ const LatestNews = () => {
   );
 };
 
-export default LatestNews;
+export default Content;
