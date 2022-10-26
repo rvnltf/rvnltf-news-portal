@@ -53,12 +53,12 @@ const HeadlineNews = ({ data }) => {
               </Grid>
             </Grid>
           </CardContent>
-          <CardActions sx={{ p: 1.25, pt: 0, justifyContent: "flex-end" }}>
+          {/* <CardActions sx={{ p: 1.25, pt: 0, justifyContent: "flex-end" }}>
             <Button size="small" disableElevation>
               View All
               <ChevronRightOutlined />
             </Button>
-          </CardActions>
+          </CardActions> */}
         </MainCard>
       )}
     </>

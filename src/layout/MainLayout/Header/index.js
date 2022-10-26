@@ -1,5 +1,5 @@
 // material-ui
-import { Avatar, Box, ButtonBase } from "@mui/material";
+import { Avatar, Box, Button, ButtonBase } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 // project imports
@@ -8,11 +8,26 @@ import SearchSection from "./SearchSection";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuList from "../MenuList";
+import ProfileSection from "./ProfileSection";
+import { AccountCircle } from "@mui/icons-material";
+import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../authentication/firebase";
+import { Link, useNavigate } from "react-router-dom";
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
 const Header = ({ handleLeftDrawerToggle }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const [user, isLoading] = useAuthState(auth);
+
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -70,6 +85,18 @@ const Header = ({ handleLeftDrawerToggle }) => {
             <MenuIcon stroke={1.5} size="1.3rem" />
           </Avatar>
         </ButtonBase>
+        {user ? (
+          <ProfileSection />
+        ) : (
+          <Button
+            onClick={() => navigate("/auth/login")}
+            sx={{ ml: { xs: 1, md: 3 }, px: { xs: 3, md: 6 } }}
+            variant="outlined"
+            endIcon={<AccountCircle />}
+          >
+            Login
+          </Button>
+        )}
       </Box>
     </>
   );

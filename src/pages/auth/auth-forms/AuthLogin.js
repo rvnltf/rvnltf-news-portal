@@ -26,7 +26,10 @@ import AnimateButton from "../../../components/extended/AnimateButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../../authentication/firebase";
+import {
+  auth,
+  signInUserWithEmailAndPassword,
+} from "../../../authentication/firebase";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -90,6 +93,7 @@ const FirebaseLogin = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
+            signInUserWithEmailAndPassword(values.email, values.password);
             setStatus({ success: true });
             setSubmitting(false);
           } catch (err) {
