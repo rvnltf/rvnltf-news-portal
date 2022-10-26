@@ -6,14 +6,14 @@ import { useTheme } from "@mui/material/styles";
 import LogoSection from "../LogoSection";
 import SearchSection from "./SearchSection";
 
-import MenuIcon from "@mui/icons-material/Menu";
-import MenuList from "../MenuList";
-import ProfileSection from "./ProfileSection";
 import { AccountCircle } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../../../authentication/firebase";
-import { Link, useNavigate } from "react-router-dom";
+import MenuList from "../MenuList";
+import ProfileSection from "./ProfileSection";
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -90,7 +90,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
         ) : (
           <Button
             onClick={() => navigate("/auth/login")}
-            sx={{ ml: { xs: 1, md: 3 }, px: { xs: 3, md: 6 } }}
+            sx={{ ml: { xs: 1, md: 3 }, px: { xs: 3, md: 6 }, py: 0 }}
             variant="outlined"
             endIcon={<AccountCircle />}
           >

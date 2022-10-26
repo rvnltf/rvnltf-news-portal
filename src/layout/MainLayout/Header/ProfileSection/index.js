@@ -1,31 +1,25 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // material-ui
-import { useTheme } from "@mui/material/styles";
 import {
   Avatar,
   Box,
-  Card,
-  CardContent,
   Chip,
   ClickAwayListener,
   Divider,
-  Grid,
-  InputAdornment,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  OutlinedInput,
   Paper,
   Popper,
   Stack,
-  Switch,
   Typography,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // third-party
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -35,7 +29,7 @@ import MainCard from "../../../../components/cards/MainCard";
 import Transitions from "../../../../components/extended/Transitions";
 
 // assets
-import { Logout, Search, Settings, VerifiedUser } from "@mui/icons-material";
+import { Logout } from "@mui/icons-material";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, signOutUser } from "../../../../authentication/firebase";
 
@@ -53,7 +47,6 @@ const ProfileSection = () => {
     }
   }, [isLoading]);
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
   /**
    * anchorRef is used on different componets and specifying one type leads to other components throwing an error
@@ -199,7 +192,6 @@ const ProfileSection = () => {
                           sx={{
                             borderRadius: `${customization.borderRadius}px`,
                           }}
-                          selected={selectedIndex === 4}
                           onClick={handleLogout}
                         >
                           <ListItemIcon>

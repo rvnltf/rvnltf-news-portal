@@ -18,15 +18,15 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Formik } from "formik";
+import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import {
   auth,
   registrationUserWithEmailAndPassword,
 } from "../../../authentication/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import AnimateButton from "../../../components/extended/AnimateButton";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const FirebaseRegister = ({ ...others }) => {
   const theme = useTheme();
@@ -35,10 +35,7 @@ const FirebaseRegister = ({ ...others }) => {
   const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
   const [showPassword, setShowPassword] = useState(false);
 
-  const [strength, setStrength] = useState(0);
-  const [level, setLevel] = useState();
-
-  const [user, isLoading, error] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
   useEffect(() => {
     if (isLoading) {
@@ -211,7 +208,7 @@ const FirebaseRegister = ({ ...others }) => {
               )}
             </FormControl>
 
-            {strength !== 0 && (
+            {/* {strength !== 0 && (
               <FormControl fullWidth>
                 <Box sx={{ mb: 2 }}>
                   <Grid container spacing={2} alignItems="center">
@@ -229,7 +226,7 @@ const FirebaseRegister = ({ ...others }) => {
                   </Grid>
                 </Box>
               </FormControl>
-            )}
+            )} */}
 
             {errors.submit && (
               <Box sx={{ mt: 3 }}>

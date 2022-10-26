@@ -1,11 +1,4 @@
-import { ChevronRightOutlined } from "@mui/icons-material";
-import {
-  Button,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { CardContent, Grid, Typography } from "@mui/material";
 import MainCard from "../../components/cards/MainCard";
 import SkeletonPopularCard from "../../components/cards/Skeleton/HeadlineCard";
 import { gridSpacing } from "../../store/constants";

@@ -44,7 +44,7 @@ const FirebaseLogin = ({ ...others }) => {
     setShowPassword(!showPassword);
   };
 
-  const [user, isLoading, error] = useAuthState(auth);
+  const [user, isLoading] = useAuthState(auth);
 
   useEffect(() => {
     if (isLoading) {
