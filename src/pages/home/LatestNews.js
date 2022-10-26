@@ -8,7 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import LatestNewsCard from "../../components/cards/Skeleton/LatestNewsCard";
-import useAllNews from "../../utils/useAllNews";
+import useAllNews from "../../hooks/useAllNews";
 
 const LatestNews = () => {
   const [pageNum, setPageNum] = useState(1);

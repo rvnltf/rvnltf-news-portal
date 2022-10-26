@@ -8,7 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import TimeAgo from "react-timeago";
 import LatestNewsCard from "../../components/cards/Skeleton/LatestNewsCard";
-import useFetch from "../../utils/useFetch";
+import useFetch from "../../hooks/useFetch";
 
 const Content = () => {
   const [searchParams] = useSearchParams();
